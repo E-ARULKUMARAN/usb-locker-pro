@@ -1,0 +1,52 @@
+name: Build and release USBLockerPro.exe
+
+# Runs automatically whenever you push a tag like "v1.0.0". You never need
+# to build the exe on your own PC and upload it by hand - GitHub's own
+# Windows server builds it fresh from usb_locker_pro.py and attaches it to
+# a Release page that anyone can download from.
+#
+# How to trigger a release:
+#   git tag v1.0.0
+#   git push origin v1.0.0
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:  # also lets you trigger it manually from the Actions tab
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade pyinstaller
+          python -m pip install -r requirements.txt
+
+      - name: Build USBLockerPro.exe
+        run: |
+          python -m PyInstaller --onefile --noconsole --name "USBLockerPro" usb_locker_pro.py
+
+      - name: Upload build artifact (for every push to main too, not just releases)
+        uses: actions/upload-artifact@v4
+        with:
+          name: USBLockerPro-windows
+          path: dist/USBLockerPro.exe
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/USBLockerPro.exe
+          generate_release_notes: true

@@ -1,0 +1,7 @@
+cryptography>=45.0.0
+argon2-cffi>=25.1.0
+
+# Optional, build-time only: needed if you run build_portable_exe.bat to
+# produce a standalone USBLockerPro.exe that doesn't need Python installed
+# on the machine that runs it. Not needed just to run "python usb_locker_pro.py".
+# pyinstaller>=6.0.0

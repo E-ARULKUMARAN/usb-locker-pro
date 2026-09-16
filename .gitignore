@@ -1,0 +1,16 @@
+# PyInstaller build output - not committed; GitHub Actions (and
+# build_portable_exe.bat) regenerate these from source every time.
+build/
+dist/
+*.spec
+
+__pycache__/
+*.pyc
+
+# Never accidentally commit a real vault or a decrypted folder if you're
+# testing inside this repo folder.
+.USBLocker/
+Unlocked/
+*.usbvl
+*.tmp
+working_location.txt
