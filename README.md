@@ -7,7 +7,6 @@ files there - no install required on the host computer.
 - **AES-256-GCM** encryption, **Argon2id** password hashing
 - One main password **+ up to 5 single-use recovery keys** ("forgot password" that actually works)
 - Vault is **mutable** - unlock into an "Unlocked" folder right on the USB drive, edit files normally, "Lock Now" re-encrypts your changes
-- Handles large vaults (30GB+) with a compact header format and live speed/ETA readout
 - Automatically recovers a leftover session if the app was force-closed or crashed
 - No cloud, no telemetry, no account - everything stays on the drive
 
