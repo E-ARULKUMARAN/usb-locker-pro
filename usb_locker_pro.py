@@ -2765,11 +2765,31 @@ for _sig in (signal.SIGINT, signal.SIGTERM):
         pass
 
 
+def _resource_path(relative_path):
+    """Resolve a bundled resource whether running as a script or as a
+    PyInstaller --onefile exe (which unpacks data files into a temp
+    folder referenced by sys._MEIPASS at runtime)."""
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
+def _set_app_icon(root):
+    """Set the title bar / taskbar icon. Safe no-op if the icon file
+    isn't present (e.g. running from source without assets/)."""
+    try:
+        icon_path = _resource_path(os.path.join("assets", "usblockerpro.ico"))
+        if os.path.exists(icon_path):
+            root.iconbitmap(default=icon_path)
+    except Exception:
+        pass  # never let a missing/broken icon stop the app from launching
+
+
 if __name__ == "__main__":
     if os.name != "nt":
         messagebox.showerror(APP_NAME, "This application is designed for Windows.")
     else:
         root = tk.Tk()
+        _set_app_icon(root)
         app = LockerApp(root)
         _active_app_ref["app"] = app
         root.mainloop()
