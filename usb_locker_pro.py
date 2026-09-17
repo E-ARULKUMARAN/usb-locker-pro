@@ -2,25 +2,6 @@
 USB Locker Pro
 ==============
 
-This revision, based on your feedback:
-  - REMOVED Face Lock entirely (webcam, OpenCV) - simpler, one less thing to
-    install or go wrong.
-  - "Create / Replace Vault" is no longer disabled once a vault exists - you
-    can always use it to replace a vault (it still asks you to confirm).
-  - "Forgot Password?" now works like a normal app: you enter one of your
-    RECOVERY KEYS (auto-generated, shown once at setup - not a password you
-    chose), and it lets you set a brand-new main password. Each recovery key
-    works ONE TIME only, like Google/GitHub backup codes.
-  - The vault is now MUTABLE: unlocking decrypts your files into an
-    "Unlocked" folder ON THE USB DRIVE ITSELF (not a hidden laptop temp
-    folder). You can add, edit, or delete files in there like a normal
-    folder. Clicking "Lock Now" SAVES those changes back into the encrypted
-    vault (re-encrypting whatever is currently in that folder) and then
-    securely wipes the temporary plaintext copy.
-  - A new "Copy Unlocked Files To..." button lets you explicitly copy the
-    currently-unlocked files to your laptop or another drive, for when you
-    actually want a second copy somewhere else.
-
 SECURITY DESIGN
 ----------------
 - AES-256-GCM authenticated encryption for file contents.
