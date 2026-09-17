@@ -36,7 +36,7 @@ jobs:
 
       - name: Build USBLockerPro.exe
         run: |
-          python -m PyInstaller --onefile --noconsole --name "USBLockerPro" usb_locker_pro.py
+          python -m PyInstaller --onefile --noconsole --name "USBLockerPro" --icon "assets/usblockerpro.ico" usb_locker_pro.py
 
       - name: Upload build artifact (for every push to main too, not just releases)
         uses: actions/upload-artifact@v4

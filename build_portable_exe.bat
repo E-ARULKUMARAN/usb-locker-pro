@@ -21,7 +21,7 @@ if errorlevel 1 (
 
 echo.
 echo Building USBLockerPro.exe ...
-python -m PyInstaller --onefile --noconsole --name "USBLockerPro" usb_locker_pro.py
+python -m PyInstaller --onefile --noconsole --name "USBLockerPro" --icon "assets\usblockerpro.ico" usb_locker_pro.py
 
 if not exist "dist\USBLockerPro.exe" (
     echo.
